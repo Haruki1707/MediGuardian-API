@@ -25,7 +25,26 @@ class AuthenticatedController extends Controller
 
         return response()->json([
             'message' => 'Successfully logged in',
-            'user' => $request->user()->createToken($request->get('email'))->plainTextToken
+            'token' => $request->user()->createToken($request->get('email'))->plainTextToken
+        ]);
+    }
+
+    /**
+     * Registers a new user and generates a new token.
+     */
+    public function register(Request $request)
+    {
+        $attributes = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:100|unique:users',
+            'password' => 'required|string|max:100',
+        ]);
+
+        $user = User::create($attributes);
+
+        return response()->json([
+            'message' => 'Successfully registered',
+            'token' => $user->createToken($request->get('email'))->plainTextToken
         ]);
     }
 
