@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('hours_schedules', function (Blueprint $table) {
             $table->id();
             $table->time('start_time');
-            $table->integer('hours');
+            $table->integer('hours_span');
         });
     }
 
