@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\DaysSchedule;
+use App\Models\HoursSchedule;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Relation::morphMap([
+            'HoursSchedule' => HoursSchedule::class,
+            'DaysSchedule' => DaysSchedule::class,
+        ]);
     }
 }
