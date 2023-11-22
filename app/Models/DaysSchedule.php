@@ -10,4 +10,10 @@ class DaysSchedule extends Model
     use HasFactory;
 
     public $timestamps = false;
+    protected $guarded = ['id'];
+
+    protected $casts = [
+        'days' => 'array',
+        'hours' => 'array',
+    ];
 }

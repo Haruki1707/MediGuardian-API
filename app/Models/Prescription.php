@@ -11,6 +11,12 @@ class Prescription extends Model
     use HasFactory;
 
     public $timestamps = false;
+    protected $guarded = ['id'];
+
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
 
     public function user(): BelongsTo
     {
@@ -22,8 +28,8 @@ class Prescription extends Model
         return $this->belongsTo(Medicine::class);
     }
 
-    public function schedule(): BelongsTo
+    public function scheduleable(): BelongsTo
     {
-        return $this->morphTo('scheduleable');
+        return $this->morphTo();
     }
 }
