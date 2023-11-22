@@ -60,7 +60,7 @@ class PrescriptionController extends Controller
         $prescription->user()->associate($request->user());
         $prescription->save();
 
-        return PrescriptionResource::make($prescription);
+        return PrescriptionResource::make($prescription->load('medicine'));
     }
 
     /**
